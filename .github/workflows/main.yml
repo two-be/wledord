@@ -33,7 +33,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
     - name: .NET - Restore dependencies
       run: dotnet restore src/Wledord/Wledord.csproj
     - name: .NET - Build
