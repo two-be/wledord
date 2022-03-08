@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
 
   wordleChange() {
     let excludes = Array.from(this.exclude)
-    let includes = Object.keys(this.wledord).filter(x => this.wledord[x]).map(x => this.wledord[x])
+    let includes = [...Object.keys(this.wordle).filter(x => this.wordle[x]).map(x => this.wordle[x]), ...Object.keys(this.wledord).filter(x => this.wledord[x]).map(x => this.wledord[x])]
     this.words = this.allWords
     excludes.filter(x => !includes.includes(x)).forEach(x => {
       this.words = this.words.filter(y => !y.includes(x.toUpperCase()))
