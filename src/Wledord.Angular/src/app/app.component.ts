@@ -38,9 +38,9 @@ export class AppComponent implements OnInit {
     try {
       this.loading = true
       let rs = await this.service.get().toPromise()
-      this.words = Object.keys(rs).filter(x => rs[x].length == 5).map(x => rs[x].toUpperCase())
-      this.allWords = this.words
-      localStorage.setItem("words", JSON.stringify(this.words))
+      this.allWords = Object.keys(rs).filter(x => rs[x].length == 5).map(x => rs[x].toUpperCase())
+      this.wordleChange()
+      localStorage.setItem("words", JSON.stringify(this.allWords))
       this.loading = false
     } catch (err) {
       console.error(err)
@@ -50,14 +50,20 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     this.words = JSON.parse(localStorage.getItem("words") || "[]")
-    this.allWords = this.words
+    if (this.words.length) {
+      this.allWords = this.words
+      this.initWords()
+      this.loading = false
+    } else {
+      await this.initWords()
+    }
   }
 
   wordleChange() {
     let excludes = Array.from(this.exclude)
-    let includes = Array.from(this.include)
+    let includes = Object.keys(this.wledord).filter(x => this.wledord[x]).map(x => this.wledord[x])
     this.words = this.allWords
-    excludes.forEach(x => {
+    excludes.filter(x => !includes.includes(x)).forEach(x => {
       this.words = this.words.filter(y => !y.includes(x.toUpperCase()))
     })
     includes.forEach(x => {
