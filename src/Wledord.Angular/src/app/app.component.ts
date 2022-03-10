@@ -59,6 +59,11 @@ export class AppComponent implements OnInit {
     }
   }
 
+  wordClick(e: string) {
+    this.exclude += e
+    this.wordleChange()
+  }
+
   wordleChange() {
     let excludes = Array.from(this.exclude)
     let includes = [...Object.keys(this.wordle).filter(x => this.wordle[x]).map(x => this.wordle[x]), ...Object.keys(this.wledord).filter(x => this.wledord[x]).map(x => this.wledord[x])]

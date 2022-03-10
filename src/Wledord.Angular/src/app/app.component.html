@@ -16,7 +16,9 @@
     <p-table [paginator]="true" responsiveLayout="scroll" [rows]="10" [value]="words">
       <ng-template pTemplate="body" let-data>
         <tr>
-          <td>{{data}}</td>
+          <td>
+            <a class="pointer" (click)="wordClick(data)">{{data}}</a>
+          </td>
         </tr>
       </ng-template>
     </p-table>
