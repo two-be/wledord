@@ -13,12 +13,10 @@
     </div>
     exclude
     <input class="w-full" [(ngModel)]="exclude" (ngModelChange)="wordleChange()" placeholder="exclude" pInputText>
-    <p-table [paginator]="true" responsiveLayout="scroll" [rows]="10" [value]="words">
+    <p-table [paginator]="true" responsiveLayout="scroll" [rowHover]="true" [rows]="10" [value]="words">
       <ng-template pTemplate="body" let-data>
         <tr>
-          <td>
-            <a class="pointer" (click)="wordClick(data)">{{data}}</a>
-          </td>
+          <td class="pointer" (click)="wordClick(data)">{{data}}</td>
         </tr>
       </ng-template>
     </p-table>
