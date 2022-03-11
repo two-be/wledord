@@ -9,7 +9,7 @@
     </div>
     incorrect
     <div class="p-inputgroup" style="max-width: 300px;">
-      <input maxlength="1" *ngFor="let key of wordleKeys; let i = index" [(ngModel)]="wledord[key]" (ngModelChange)="wordleChange()" pInputText placeholder="{{i + 1}}" type="text">
+      <input *ngFor="let key of wordleKeys; let i = index" [(ngModel)]="wledord[key]" (ngModelChange)="wordleChange()" pInputText placeholder="{{i + 1}}" type="text">
     </div>
     exclude
     <input class="w-full" [(ngModel)]="exclude" (ngModelChange)="wordleChange()" placeholder="exclude" pInputText>

@@ -75,6 +75,6 @@ export class AppComponent implements OnInit {
       this.words = this.words.filter(y => y.includes(x))
     })
     this.words = this.words.filter(x => this.wordleKeys.every(y => x.charAt(y).includes(this.wordle[y].toUpperCase())))
-    this.words = this.words.filter(x => this.wordleKeys.every(y => x.charAt(y) != this.wledord[y].toUpperCase()))
+    this.words = this.words.filter(x => this.wordleKeys.every(y => !this.wledord[y].toUpperCase().includes(x.charAt(y))))
   }
 }
