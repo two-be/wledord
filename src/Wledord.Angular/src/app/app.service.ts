@@ -7,6 +7,6 @@ export class AppService {
     constructor(private http: HttpClient) { }
 
     get() {
-        return this.http.get<any>("https://random-word-api.herokuapp.com/all")
+        return this.http.get<any>("/word")
     }
 }
