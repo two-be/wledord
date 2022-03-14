@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   }
   exclude = ""
   include = ""
-  incorrect = {
+  wrong = {
     0: "",
     1: "",
     2: "",
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
 
   wordleChange() {
     let corrects = this.wordleKeys.filter(x => this.correct[x]).map(x => this.correct[x].toUpperCase())
-    let incorrects = this.wordleKeys.filter(x => this.incorrect[x]).flatMap(x => Array.from(this.incorrect[x].toUpperCase()))
+    let incorrects = this.wordleKeys.filter(x => this.wrong[x]).flatMap(x => Array.from(this.wrong[x].toUpperCase()))
     let excludes = Array.from(this.exclude.toUpperCase())
     let includes = [...corrects, ...incorrects]
     this.words = this.allWords
@@ -75,6 +75,6 @@ export class AppComponent implements OnInit {
       this.words = this.words.filter(y => y.includes(x))
     })
     this.words = this.words.filter(x => this.wordleKeys.every(y => x.charAt(y).includes(this.correct[y].toUpperCase())))
-    this.words = this.words.filter(x => this.wordleKeys.every(y => !this.incorrect[y].toUpperCase().includes(x.charAt(y))))
+    this.words = this.words.filter(x => this.wordleKeys.every(y => !this.wrong[y].toUpperCase().includes(x.charAt(y))))
   }
 }

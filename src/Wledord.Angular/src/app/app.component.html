@@ -3,17 +3,25 @@
 </p-blockUI>
 <div class="container">
   <p-card header="Wledord">
-    correct
-    <div class="p-inputgroup" style="max-width: 300px;">
-      <input maxlength="1" *ngFor="let key of wordleKeys; let i = index" [(ngModel)]="correct[key]" (ngModelChange)="wordleChange()" pInputText placeholder="{{i + 1}}" type="text">
+    <div class="grid">
+      <div class="col-4 field">
+        <label>Correct Spot</label>
+        <div class="p-inputgroup">
+          <input class="spot" [class.bg-correct-spot]="correct[key]" maxlength="1" *ngFor="let key of wordleKeys; let i = index" [(ngModel)]="correct[key]" (ngModelChange)="wordleChange()" pInputText placeholder="{{i + 1}}" type="text">
+        </div>
+      </div>
+      <div class="col-4 field">
+        <label>Wrong Spot</label>
+        <div class="p-inputgroup">
+          <input class="spot" [class.bg-wrong-spot]="wrong[key]" *ngFor="let key of wordleKeys; let i = index" [(ngModel)]="wrong[key]" (ngModelChange)="wordleChange()" pInputText placeholder="{{i + 1}}" type="text">
+        </div>
+      </div>
+      <div class="col-12 field">
+        <label>Not in the Word</label>
+        <input class="w-full" [(ngModel)]="exclude" (ngModelChange)="wordleChange()" placeholder="Not in the Word" pInputText style="letter-spacing: 10px; text-transform: uppercase;">
+      </div>
     </div>
-    incorrect
-    <div class="p-inputgroup" style="max-width: 300px;">
-      <input *ngFor="let key of wordleKeys; let i = index" [(ngModel)]="incorrect[key]" (ngModelChange)="wordleChange()" pInputText placeholder="{{i + 1}}" type="text">
-    </div>
-    exclude
-    <input class="w-full" [(ngModel)]="exclude" (ngModelChange)="wordleChange()" placeholder="exclude" pInputText>
-    <p-table [paginator]="true" responsiveLayout="scroll" [rowHover]="true" [rows]="10" [value]="words">
+    <p-table [paginator]="true" responsiveLayout="scroll" [rowHover]="true" [rows]="5" [value]="words">
       <ng-template pTemplate="body" let-data>
         <tr>
           <td class="pointer" (click)="wordClick(data)">{{data}}</td>
