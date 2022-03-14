@@ -7,6 +7,6 @@ export class AppService {
     constructor(private http: HttpClient) { }
 
     get() {
-        return this.http.get<any>("/word")
+        return this.http.get<any>("https://asp.demosoft.me/json/wordle.json")
     }
 }
