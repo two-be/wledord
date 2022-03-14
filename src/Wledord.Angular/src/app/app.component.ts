@@ -10,25 +10,23 @@ import { AppService } from "./app.service"
 export class AppComponent implements OnInit {
 
   allWords: string[] = []
+  correct = {
+    0: "",
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+  }
   exclude = ""
-  excludes: string[] = []
   include = ""
-  includes: string[] = []
+  incorrect = {
+    0: "",
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+  }
   loading = false
-  wledord = {
-    0: "",
-    1: "",
-    2: "",
-    3: "",
-    4: "",
-  }
-  wordle = {
-    0: "",
-    1: "",
-    2: "",
-    3: "",
-    4: "",
-  }
   wordleKeys: number[] = [0, 1, 2, 3, 4]
   words: string[] = []
 
@@ -59,17 +57,24 @@ export class AppComponent implements OnInit {
     }
   }
 
+  wordClick(e: string) {
+    this.exclude += e
+    this.wordleChange()
+  }
+
   wordleChange() {
-    let excludes = Array.from(this.exclude)
-    let includes = [...Object.keys(this.wordle).filter(x => this.wordle[x]).map(x => this.wordle[x]), ...Object.keys(this.wledord).filter(x => this.wledord[x]).map(x => this.wledord[x])]
+    let corrects = this.wordleKeys.filter(x => this.correct[x]).map(x => this.correct[x].toUpperCase())
+    let incorrects = this.wordleKeys.filter(x => this.incorrect[x]).flatMap(x => Array.from(this.incorrect[x].toUpperCase()))
+    let excludes = Array.from(this.exclude.toUpperCase())
+    let includes = [...corrects, ...incorrects]
     this.words = this.allWords
     excludes.filter(x => !includes.includes(x)).forEach(x => {
-      this.words = this.words.filter(y => !y.includes(x.toUpperCase()))
+      this.words = this.words.filter(y => !y.includes(x))
     })
     includes.forEach(x => {
-      this.words = this.words.filter(y => y.includes(x.toUpperCase()))
+      this.words = this.words.filter(y => y.includes(x))
     })
-    this.words = this.words.filter(x => this.wordleKeys.every(y => x.charAt(y).includes(this.wordle[y].toUpperCase())))
-    this.words = this.words.filter(x => this.wordleKeys.every(y => x.charAt(y) != this.wledord[y].toUpperCase()))
+    this.words = this.words.filter(x => this.wordleKeys.every(y => x.charAt(y).includes(this.correct[y].toUpperCase())))
+    this.words = this.words.filter(x => this.wordleKeys.every(y => !this.incorrect[y].toUpperCase().includes(x.charAt(y))))
   }
 }

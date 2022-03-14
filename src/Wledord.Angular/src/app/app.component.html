@@ -5,18 +5,18 @@
   <p-card header="Wledord">
     correct
     <div class="p-inputgroup" style="max-width: 300px;">
-      <input maxlength="1" *ngFor="let key of wordleKeys; let i = index" [(ngModel)]="wordle[key]" (ngModelChange)="wordleChange()" pInputText placeholder="{{i + 1}}" type="text">
+      <input maxlength="1" *ngFor="let key of wordleKeys; let i = index" [(ngModel)]="correct[key]" (ngModelChange)="wordleChange()" pInputText placeholder="{{i + 1}}" type="text">
     </div>
     incorrect
     <div class="p-inputgroup" style="max-width: 300px;">
-      <input maxlength="1" *ngFor="let key of wordleKeys; let i = index" [(ngModel)]="wledord[key]" (ngModelChange)="wordleChange()" pInputText placeholder="{{i + 1}}" type="text">
+      <input *ngFor="let key of wordleKeys; let i = index" [(ngModel)]="incorrect[key]" (ngModelChange)="wordleChange()" pInputText placeholder="{{i + 1}}" type="text">
     </div>
     exclude
     <input class="w-full" [(ngModel)]="exclude" (ngModelChange)="wordleChange()" placeholder="exclude" pInputText>
-    <p-table [paginator]="true" responsiveLayout="scroll" [rows]="10" [value]="words">
+    <p-table [paginator]="true" responsiveLayout="scroll" [rowHover]="true" [rows]="10" [value]="words">
       <ng-template pTemplate="body" let-data>
         <tr>
-          <td>{{data}}</td>
+          <td class="pointer" (click)="wordClick(data)">{{data}}</td>
         </tr>
       </ng-template>
     </p-table>
